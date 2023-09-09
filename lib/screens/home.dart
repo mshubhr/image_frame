@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:image_frame/screens/splash.dart';
 import 'package:flutter/services.dart';
@@ -51,10 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                   border: Border.all(color: const Color(0x61000000)),
                   borderRadius: BorderRadius.circular(10.0)),
-              child: const Column(
+              child: Column(
                 children: [
-                  SizedBox(height: 22.0),
-                  Text(
+                  const SizedBox(height: 22.0),
+                  const Text(
                     'Upload Image',
                     style: TextStyle(
                       color: Color(0x61000000),
@@ -71,14 +72,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       ].request();
                       if (statuses[Permission.storage]!.isGranted &&
                           statuses[Permission.camera]!.isGranted) {
+                        // ignore: use_build_context_synchronously
                         showImagePicker(context);
                       } else {
-                        print('no permission granted');
+                        if (kDebugMode) {
+                          print('no permission granted');
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 8, 138, 95)),
-                    child: Text(
+                        backgroundColor: const Color.fromARGB(255, 8, 138, 95)),
+                    child: const Text(
                       'Choose from Device',
                       style: TextStyle(color: Colors.white),
                     ),
@@ -88,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 20.0),
             imageFile == null
-                ? SizedBox(height: 400, width: 400)
+                ? const SizedBox(height: 400, width: 400)
                 : _buildImage(),
           ],
         ),
@@ -98,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildImage() {
     if (imageFile == null) {
-      return SizedBox(height: 400, width: 400);
+      return const SizedBox(height: 400, width: 400);
     }
     Widget imageWidget = Image.file(
       imageFile!,
@@ -148,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void showImagePicker(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
@@ -160,20 +164,20 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(12.0),
             child: Column(
               children: [
-                Text(
+                const Text(
                   'Complete action using',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       child: InkWell(
-                        child: Column(
+                        child: const Column(
                           children: [
                             Icon(
                               Icons.image,
@@ -196,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Expanded(
                       child: InkWell(
-                        child: SizedBox(
+                        child: const SizedBox(
                           child: Column(
                             children: [
                               Icon(Icons.camera_alt, size: 50.0),
@@ -300,14 +304,14 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          content: Container(
+          content: SizedBox(
             width: 700,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 20),
-                Center(
+                const SizedBox(height: 20),
+                const Center(
                   child: Text(
                     'Uploaded Image',
                     style: TextStyle(
@@ -317,15 +321,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Center(
-                  child: Container(
+                  child: SizedBox(
                     height: 200,
                     width: 150,
                     child: _buildImage(),
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -339,7 +343,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           border: Border.all(color: Colors.black45),
                         ),
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
                           useHeartFrame = true;
@@ -351,12 +355,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(10.0),
                             border: Border.all(color: Colors.black45),
                           ),
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Image.asset('assets/user_image_frame_1.png',
                               width: 10, height: 10, fit: BoxFit.fill),
                         ),
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
                           useSquareFrame = true;
@@ -368,12 +372,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(10.0),
                             border: Border.all(color: Colors.black45),
                           ),
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Image.asset('assets/user_image_frame_2.png',
                               width: 10, height: 10, fit: BoxFit.fill),
                         ),
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
                           useCircleFrame = true;
@@ -385,12 +389,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(10.0),
                             border: Border.all(color: Colors.black45),
                           ),
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Image.asset('assets/user_image_frame_3.png',
                               width: 10, height: 10, fit: BoxFit.fill),
                         ),
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
                           useRectangleFrame = true;
@@ -402,7 +406,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(10.0),
                             border: Border.all(color: Colors.black45),
                           ),
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Image.asset('assets/user_image_frame_4.png',
                               width: 10, height: 10, fit: BoxFit.fill),
                         ),
@@ -410,9 +414,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Center(
-                  child: Container(
+                  child: SizedBox(
                     height: 50,
                     width: 300,
                     child: ElevatedButton(
@@ -445,9 +449,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 8, 138, 95),
+                        backgroundColor: const Color.fromARGB(255, 8, 138, 95),
                       ),
-                      child: Text('Use this image',
+                      child: const Text('Use this image',
                           style: TextStyle(color: Colors.white)),
                     ),
                   ),
